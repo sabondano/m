@@ -9,3 +9,12 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+MerchantBotWeb.Repo.delete_all MerchantBotWeb.User
+
+MerchantBotWeb.User.changeset(%MerchantBotWeb.User{},
+                              %{name: "Test User",
+                                email: "testuser@example.com",
+                                password: "secret",
+                                password_confirmation: "secret"})
+|> MerchantBotWeb.Repo.insert!
+|> Coherence.ControllerHelpers.confirm!
