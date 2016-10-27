@@ -18,7 +18,7 @@ defmodule MerchantBotWeb.Coherence.SessionController do
   @doc false
   def layout_view(conn, _) do
     conn
-    |> put_layout({Coherence.LayoutView, "app.html"})
+    |> put_layout({MerchantBotWeb.LayoutView, "app.html"})
     |> put_view(Coherence.SessionView)
   end
 
@@ -42,7 +42,6 @@ defmodule MerchantBotWeb.Coherence.SessionController do
   def new(conn, _params) do
     login_field = Config.login_field
     conn
-    |> put_layout({Coherence.LayoutView, "app.html"})
     |> put_view(Coherence.SessionView)
     |> render(:new, [{login_field, ""}, remember: rememberable_enabled?])
   end
@@ -97,7 +96,6 @@ defmodule MerchantBotWeb.Coherence.SessionController do
     else
       conn
       |> failed_login(user, lockable?)
-      |> put_layout({Coherence.LayoutView, "app.html"})
       |> put_view(Coherence.SessionView)
       |> render(:new, [{login_field, login}, remember: rememberable_enabled?])
     end

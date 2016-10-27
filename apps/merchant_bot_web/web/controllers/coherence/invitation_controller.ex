@@ -24,7 +24,7 @@ defmodule MerchantBotWeb.Coherence.InvitationController do
   @doc false
   def layout_view(conn, _) do
     conn
-    |> put_layout({Coherence.LayoutView, "app.html"})
+    |> put_layout({MerchantBotWeb.LayoutView, "app.html"})
     |> put_view(Coherence.InvitationView)
   end
 
