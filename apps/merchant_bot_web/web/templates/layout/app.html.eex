@@ -14,6 +14,22 @@
   <body>
     <div class="container">
       <header class="header">
+        <%= if @current_user do %>
+          <nav role="navigation">
+            <ul class="nav nav-pills pull-left" style="margin-top: 0px">
+              <li><a href="/products">Products</a></li>
+            </ul>
+          </nav>
+        <% end %>
+        <ol class="breadcrumb text-right">
+          <%= if @current_user do %>
+            <%= if @conn.assigns[:remembered] do %>
+              <li style="color: red;">!!</li>
+            <% end %>
+            <li><%= MerchantBotWeb.Coherence.ViewHelpers.invitation_link(@conn) %></li>
+          <% end %>
+          <%= MerchantBotWeb.Coherence.ViewHelpers.coherence_links(@conn, :layout) %>
+        </ol>
         <h1>MerchantBot</h1>
       </header>
 
