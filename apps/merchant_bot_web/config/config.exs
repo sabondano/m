@@ -32,10 +32,10 @@ config :coherence,
   repo: MerchantBotWeb.Repo,
   module: MerchantBotWeb,
   logged_out_url: "/",
-  email_from: {"Your Name", "yourname@example.com"},
+  email_from: {"MerchantBot", "sabondano1@gmail.com"},
   opts: [:confirmable, :rememberable, :registerable, :invitable, :authenticatable, :recoverable, :lockable, :trackable, :unlockable_with_token]
 
 config :coherence, MerchantBotWeb.Coherence.Mailer,
   adapter: Swoosh.Adapters.Sendgrid,
-  api_key: "your api key here"
+  api_key: {:system, "MERCHANT_BOT_SENDGRID_KEY"}
 # %% End Coherence Configuration %%
