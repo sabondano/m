@@ -1,0 +1,53 @@
+<h2>Show item</h2>
+
+<ul>
+
+  <li>
+    <strong>Item number:</strong>
+    <%= @item.item_number %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @item.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @item.description %>
+  </li>
+
+  <li>
+    <strong>Unit price:</strong>
+    <%= @item.unit_price %>
+  </li>
+
+  <li>
+    <strong>Msrp:</strong>
+    <%= @item.msrp %>
+  </li>
+
+  <li>
+    <strong>Length:</strong>
+    <%= @item.length %>
+  </li>
+
+  <li>
+    <strong>Width:</strong>
+    <%= @item.width %>
+  </li>
+
+  <li>
+    <strong>Height:</strong>
+    <%= @item.height %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @item.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: item_path(@conn, :edit, @item) %>
+<%= link "Back", to: item_path(@conn, :index) %>

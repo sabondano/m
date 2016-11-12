@@ -1,0 +1,59 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :item_number, class: "control-label" %>
+    <%= text_input f, :item_number, class: "form-control" %>
+    <%= error_tag f, :item_number %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :name, class: "control-label" %>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :description, class: "control-label" %>
+    <%= textarea f, :description, class: "form-control" %>
+    <%= error_tag f, :description %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :unit_price, class: "control-label" %>
+    <%= number_input f, :unit_price, step: "any", class: "form-control" %>
+    <%= error_tag f, :unit_price %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :msrp, class: "control-label" %>
+    <%= number_input f, :msrp, step: "any", class: "form-control" %>
+    <%= error_tag f, :msrp %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :length, class: "control-label" %>
+    <%= number_input f, :length, step: "any", class: "form-control" %>
+    <%= error_tag f, :length %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :width, class: "control-label" %>
+    <%= number_input f, :width, step: "any", class: "form-control" %>
+    <%= error_tag f, :width %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :height, class: "control-label" %>
+    <%= number_input f, :height, step: "any", class: "form-control" %>
+    <%= error_tag f, :height %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

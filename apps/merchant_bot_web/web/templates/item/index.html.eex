@@ -1,0 +1,42 @@
+<h2>Listing items</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Item number</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Unit price</th>
+      <th>Msrp</th>
+      <th>Length</th>
+      <th>Width</th>
+      <th>Height</th>
+      <th>User</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for item <- @items do %>
+    <tr>
+      <td><%= item.item_number %></td>
+      <td><%= item.name %></td>
+      <td><%= item.description %></td>
+      <td><%= item.unit_price %></td>
+      <td><%= item.msrp %></td>
+      <td><%= item.length %></td>
+      <td><%= item.width %></td>
+      <td><%= item.height %></td>
+      <td><%= item.user_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: item_path(@conn, :show, item), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: item_path(@conn, :edit, item), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: item_path(@conn, :delete, item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New item", to: item_path(@conn, :new) %>

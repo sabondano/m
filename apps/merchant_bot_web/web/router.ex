@@ -39,5 +39,6 @@ defmodule MerchantBotWeb.Router do
   scope "/", MerchantBotWeb do
     pipe_through :protected
     # Add protected routes below
+    resources "/items", ItemController
   end
 end
