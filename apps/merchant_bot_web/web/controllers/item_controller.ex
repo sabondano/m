@@ -4,17 +4,28 @@ defmodule MerchantBotWeb.ItemController do
   alias MerchantBotWeb.Item
 
   def index(conn, _params) do
-    items = Repo.all(Item)
+    items =
+      Coherence.current_user(conn)
+      |> user_items()
+      |> Repo.all()
+
     render(conn, "index.html", items: items)
   end
 
   def new(conn, _params) do
-    changeset = Item.changeset(%Item{})
+    changeset =
+      Coherence.current_user(conn)
+      |> build_assoc(:items)
+      |> Item.changeset()
+
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"item" => item_params}) do
-    changeset = Item.changeset(%Item{}, item_params)
+    changeset =
+      Coherence.current_user(conn)
+      |> build_assoc(:items)
+      |> Item.changeset(item_params)
 
     case Repo.insert(changeset) do
       {:ok, _item} ->
@@ -27,18 +38,29 @@ defmodule MerchantBotWeb.ItemController do
   end
 
   def show(conn, %{"id" => id}) do
-    item = Repo.get!(Item, id)
+    item =
+      Coherence.current_user(conn)
+      |> user_items()
+      |> Repo.get!(id)
+
     render(conn, "show.html", item: item)
   end
 
   def edit(conn, %{"id" => id}) do
-    item = Repo.get!(Item, id)
+    item = Coherence.current_user(conn)
+      |> user_items()
+      |> Repo.get!(id)
+
     changeset = Item.changeset(item)
     render(conn, "edit.html", item: item, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "item" => item_params}) do
-    item = Repo.get!(Item, id)
+    item =
+      Coherence.current_user(conn)
+      |> user_items()
+      |> Repo.get!(id)
+
     changeset = Item.changeset(item, item_params)
 
     case Repo.update(changeset) do
@@ -52,7 +74,10 @@ defmodule MerchantBotWeb.ItemController do
   end
 
   def delete(conn, %{"id" => id}) do
-    item = Repo.get!(Item, id)
+    item =
+      Coherence.current_user(conn)
+      |> user_items()
+      |> Repo.get!(id)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
@@ -61,5 +86,9 @@ defmodule MerchantBotWeb.ItemController do
     conn
     |> put_flash(:info, "Item deleted successfully.")
     |> redirect(to: item_path(conn, :index))
+  end
+
+  defp user_items(user) do
+    assoc(user, :items)
   end
 end

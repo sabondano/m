@@ -7,6 +7,7 @@ defmodule MerchantBotWeb.User do
     field :email, :string
     coherence_schema
 
+    has_many :items, MerchantBotWeb.Item
     timestamps
   end
 
